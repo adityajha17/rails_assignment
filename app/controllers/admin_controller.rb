@@ -75,7 +75,7 @@ class AdminController < ApplicationController
     if session[:phone]
       @job = Job.find_by(id: params[:id])
       if @job.present?
-        if @job.update(edit_job_status)
+        if @job.update(update_job_status)
           render json: { status: 200, info: :status_changed, job: @job }
         else
           render json: { status: 500, info: "Validation errors" }
@@ -120,7 +120,7 @@ class AdminController < ApplicationController
     params.permit(:title, :description, :category, :exp, :status)
   end
 
-  def edit_job_status
+  def update_job_status
     params.permit(:status)
   end
 
